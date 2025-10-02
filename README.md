@@ -7,8 +7,6 @@ Standalone Java **console** app that demonstrates Create/Read/Update/Delete (CRU
 - Collections (with subset views): `Questions`, `Answers`  
 Includes JUnit 5 tests and UML (Class + Sequence) diagrams.
 
-> If any of the details below differ from your course’s requirements, I don’t explicitly know—adjust placeholders to match your class.
-
 ---
 
 ## Features
