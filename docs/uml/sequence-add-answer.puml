@@ -1,0 +1,29 @@
+@startuml
+actor User
+participant App
+participant QuestionsService as QS
+participant AnswersService as AS
+participant Questions as QRepo
+participant Answers as ARepo
+
+User -> App: Create Question
+App -> QS: create(title, body, author, tags)
+QS -> QRepo: create(...)
+QRepo --> QS: Question
+QS --> App: Question
+
+User -> App: Add Answer
+App -> AS: create(questionId, body, author)
+AS -> QRepo: get(questionId)
+QRepo --> AS: Question
+AS -> ARepo: create(...)
+ARepo --> AS: Answer
+AS --> App: Answer
+
+User -> App: Accept Answer
+App -> AS: accept(answerId)
+AS -> ARepo: get(answerId)
+AS -> ARepo: unacceptAll(questionId)
+AS -> ARepo: setAccepted(answerId, true)
+AS -> QRepo: setStatus(questionId, ANSWERED)
+@enduml

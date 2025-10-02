@@ -1,0 +1,47 @@
+@startuml
+class Question {
+  +UUID id
+  +String title
+  +String body
+  +String author
+  +Set<String> tags
+  +Status status
+  +Instant createdAt
+  +Instant updatedAt
+}
+enum Status { OPEN; ANSWERED; CLOSED }
+
+class Answer {
+  +UUID id
+  +UUID questionId
+  +String body
+  +String author
+  +boolean isAccepted
+  +Instant createdAt
+  +Instant updatedAt
+}
+
+class Questions {
+  +Question create(...)
+  +Optional<Question> get(UUID)
+  +Question update(UUID, String, String)
+  +void delete(UUID)
+  +List<Question> listAll()
+  +List<Question> search(String, Status, Set<String>)
+  +void setStatus(UUID, Status)
+}
+
+class Answers {
+  +Answer create(UUID, String, String)
+  +Optional<Answer> get(UUID)
+  +List<Answer> listByQuestion(UUID)
+  +Answer update(UUID, String)
+  +void delete(UUID)
+  +void unacceptAll(UUID)
+  +void setAccepted(UUID, boolean)
+  +void deleteByQuestion(UUID)
+}
+
+Questions "1" o-- "*" Question
+Answers "1" o-- "*" Answer
+@enduml
